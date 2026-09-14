@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mode sombre (voir lib/theme.tsx et tailwind.config.ts) : valeurs claires = palette Tailwind
+   `slate` d'origine (aucun changement visuel par défaut) ; `.dark` les inverse pour que
+   `bg-white`/`text-slate-800`/`border-slate-200`/etc. rendent correctement sur fond sombre
+   sans avoir à ajouter des variantes `dark:` dans chaque composant. */
+:root {
+  --color-navy: #1f3a5f;
+  --color-accent: #c0392b;
+  --color-white: #ffffff;
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  --slate-950: #020617;
+  color-scheme: light;
+}
+
+.dark {
+  --color-navy: #9db4d4;
+  --color-accent: #f87171;
+  --color-white: #0f172a;
+  --slate-50: #1e293b;
+  --slate-100: #273548;
+  --slate-200: #334155;
+  --slate-300: #475569;
+  --slate-400: #64748b;
+  --slate-500: #94a3b8;
+  --slate-600: #cbd5e1;
+  --slate-700: #e2e8f0;
+  --slate-800: #f1f5f9;
+  --slate-900: #f8fafc;
+  --slate-950: #ffffff;
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-white text-slate-800;
+}
+
+@keyframes blob-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(20px, -30px) scale(1.08);
+  }
+  66% {
+    transform: translate(-15px, 20px) scale(0.94);
+  }
+}
+
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.5;
+  animation: blob-float 16s ease-in-out infinite;
+}
+
+.blob-soft {
+  opacity: 0.14;
+  filter: blur(90px);
+}
+
+.glass-panel {
+  background: rgb(255 255 255 / 70%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgb(255 255 255 / 50%);
+}
+
+.dark .glass-panel {
+  background: rgb(15 23 42 / 70%);
+  border: 1px solid rgb(255 255 255 / 10%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+  }
+}
