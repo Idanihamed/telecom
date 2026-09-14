@@ -2,7 +2,12 @@
 
 import type { AuthUser } from './types';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/api';
+// Chemin relatif (même origine que la page), PAS l'URL absolue de l'API (contrairement à
+// lib/api.ts, qui fait des requêtes serveur→serveur sans cookies) : voir le rewrite dans
+// next.config.mjs — indispensable dès que le site et l'API sont sur des domaines différents
+// en production, pour que le cookie de session ne soit pas traité comme "tiers" par le
+// navigateur (donc potentiellement bloqué, ex. Safari) et déclenche la boucle de reconnexion.
+const API_URL = '/api';
 
 // Les tokens d'accès/rafraîchissement vivent désormais dans des cookies httpOnly posés par
 // l'API (voir backend/src/auth/cookies.ts) : illisibles en JavaScript, donc invulnérables au
